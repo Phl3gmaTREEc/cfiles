@@ -1,0 +1,12 @@
+% dotfiles
+
+# GCF - Basic command to use (change path if necessary) - alias as gcf
+/usr/bin/git --git-dir=$HOME/git_repos/config_files/cfiles/ --work-tree=$HOME
+
+# GCF - Init the bare cfiles repo
+git init --bare $HOME/git_repos/config_files/cfiles
+
+# GCF - do not showw untracke dfiles
+gcf config --local status.showUntrackedFiles no
+
+% git

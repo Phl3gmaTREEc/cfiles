@@ -1,0 +1,9 @@
+% tools, ventoy
+
+# Launch Ventoy WebGUI from ventoy folder
+sudo sh VentoyWeb.sh
+
+% tools, magick
+
+# Convert and lower quality (60) of image
+magick <source> -quality 60 <target>

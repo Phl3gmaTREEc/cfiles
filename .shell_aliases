@@ -1,0 +1,70 @@
+## Configuration
+alias bconf='nvim /home/ptc/.bashrc'
+alias zconf='nvim ~/.zshrc'
+alias sconf='nvim ~/.shell_config'
+alias aconf='nvim ~/.shell_aliases'
+alias qconf='nvim ~/.config/qtile/config.py'
+alias qasconf='nvim ~/.config/qtile/autostart.sh'
+alias kconf='nvim ~/.config/kitty/kitty.conf'
+alias pconf='nvim ~/.config/starship.toml'
+alias bsrc='source ~/.bashrc'
+alias zsrc='source ~/.zshrc'
+
+## Basic actions
+alias cl='clear'
+alias ex='exit'
+
+## GRUB
+alias grubup='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+
+## Pacman
+alias pmse='pacman -Ss'
+alias pmin='sudo pacman -S'
+alias pmun='sudo pacman -Rs'
+alias pmup='sudo pacman -Syu && paru -Sua && flatpak update'
+
+## Flatpak
+alias fpup='flatpak update'
+alias fpse='flatpak search'
+alias fpin='flatpak install'
+alias fpun='flatpak uninstall'
+alias fpli='flatpak list'
+
+## Redshift
+alias rsn='redshift -P -O 4500 -b 0.8'
+alias rsd='redshift -x'
+
+## Apps
+alias v='nvim'
+alias e='cd "$(xplr --print-pwd-as-result)"'
+
+## Background
+alias bgs='feh --bg-fill ~/Pictures/Wallpapers/therepoclub_dracula1_mod.png'
+
+## LS & CD
+#alias ls='exa -lhaG --icons --time-style=long-iso'
+alias ls='lsd -ha --header --group-dirs=first --date '+%F %R''
+alias lsl='lsd -lha --header --group-dirs=first --date '+%F %R''
+alias ..='cd ..'
+alias ...='cd ../../'
+alias repos='z ~/git_repos/'
+alias vault='z ~/git_repos/Personal_knowledge_base/'
+
+## GIT alias
+alias gs='git status'
+alias ga='git add'
+alias gaa='git add --all'
+alias gau='git add -u'
+alias gcm='git commit -m "standart commit"'
+alias gc='git commit -m $1'
+alias gpsh='git push'
+alias gpll='git pull'
+alias gcln='git clone'
+
+## GIT alias Config files
+alias gcf='/usr/bin/git --git-dir=$HOME/git_repos/config_files/cfiles/ --work-tree=$HOME'
+alias gcfa='gcf add'
+alias gcfau='gcf add -u'
+alias gcfc='gcf commit -m $1'
+alias gcfs='gcf status'
+alias gcfash='./gcf/gcfa_script.sh'

@@ -1,0 +1,8 @@
+% system, grub
+
+# Update list of GRUB entries ini the menu
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+% system, bluetooth
+# Enable and start bluetooth daemon
+sudo systemctl enable --now bluetooth

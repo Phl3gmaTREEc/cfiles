@@ -1,0 +1,40 @@
+% pacman
+
+# Install package by name
+sudo pacman -S <pkg_name>
+
+# Search for package by name
+sudo pacman -Ss <pkg_name>
+
+# Upgrade packages
+sudo pacman -Syu
+
+# Remove package and dependencies by name
+sudo pacman -Rs <pkg_name>
+
+# Remove package and dependencies and config files by name
+sudo pacman -Rns <pkg_name>
+
+# Remove orphan dependencies
+sudo pacman -Qdtq | sudo pacman -Rs -
+
+# Remove packages no longer in any repositories
+sudo pacman -Qmq | sudo pacman -Rs -
+
+# Display local package information
+pacman -Qi <pkg_name>
+
+# Display remote package information
+pacman -Si <pkg_name>
+
+# List packages wwith update available
+pacman -Qu
+
+# List installed packages
+pacman -Q
+
+# List explicitily installed packages
+pacman -Qe
+
+# List installed dependencies packages
+pacman -Qd

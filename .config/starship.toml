@@ -1,0 +1,172 @@
+# Global format
+format = """
+[\uE0B6](fg:#bd93f9)\
+[\uF303](bg:#bd93f9 fg:bold #f8f8f2)\
+$username\
+[\uE0B0](bg:#6272a4 fg:#bd93f9)\
+$directory\
+[\uE0B0](fg:#6272a4)\
+$git_branch\
+$git_status\
+$character
+"""
+
+# General config
+add_newline = true
+
+[line_break]
+disabled = false
+
+[username]
+style_user = "bg:#bd93f9 fg:bold #f8f8f2"
+style_root = "bg:#bd93f9 fg:bold #f8f8f2"
+show_always = true
+format = "[ $user ]($style)"
+
+[directory]
+truncation_symbol = "../"
+style = "bg:#6272a4 fg:bold #f8f8f2"
+read_only = "\uF83D"
+read_only_style = "bg:#6272a4 fg:#ff5555"
+format = "[ $path]($style)[ $read_only ]($read_only_style)"
+
+[character]
+success_symbol = "[\uE285](fg:#50fa7b)"
+error_symbol = "[\uE009](fg:#ff5555)"
+vicmd_symbol = "[\uE285](fg:#ffb86c)"
+format = " $symbol "
+
+[git_branch]
+style = "bg:#44475a fg:bold #f1fa8c"
+format = " [\uE0B0](fg:#282a36 bg:#44475a)[ $symbol$branch(:$remote_branch)]($style)"
+
+[git_status]
+style = "bg:#44475a fg:#ffb86c"
+format = "[ \u003C](bg:#44475a fg:#ffb86c)[$all_status$ahead_behind]($style)[\u003E ](bg:#44475a fg:#ffb86c)[\uE0B0](fg:#44475a)"
+
+# Symbols
+#[aws]
+#symbol = "aws "
+#
+#[buf]
+#symbol = "buf"
+#
+#[c]
+#symbol = "C "
+#
+#[cmake]
+#symbol = "cmk"
+#
+#[cobol]
+#symbol = "cobol "
+#
+#[conda]
+#symbol = "conda "
+#
+#[crystal]
+#symbol = "cr "
+#
+#[dart]
+#symbol = "dart "
+#
+#[deno]
+#symbol = "deno "
+#
+#[docker_context]
+#symbol = "docker "
+#
+#[dotnet]
+#symbol = ".Net"
+#
+#[elixir]
+#symbol = "exs "
+#
+#[elm]
+#symbol = "elm "
+#
+#[erlang]
+#symbol = "erl"
+#
+#[gcloud]
+#symbol = "gcloud"
+#
+#[golang]
+#symbol = "go "
+#
+#[haskell]
+#symbol = "haskell"
+#
+#[helm]
+#symbol = "helm"
+#
+#[java]
+#symbol = "java "
+#
+#[julia]
+#symbol = "jl "
+#
+#[kotlin]
+#symbol = "kt "
+#
+#[lua]
+#symbol = "lua"
+#
+#[nim]
+#symbol = "nim"
+#
+#[nodejs]
+#symbol = "nodejs "
+#
+#[nix_shell]
+#symbol = "nix "
+#
+#[ocaml]
+#symbol = "ml "
+#
+#[package]
+#symbol = "pkg "
+#
+#[perl]
+#symbol = "pl "
+#
+#[php]
+#symbol = "php "
+#
+#[pulumi]
+#symbol = "pulumi "
+#
+#[purescript]
+#symbol = "purs "
+#
+#[python]
+#symbol = "py "
+#
+#[rlang]
+#symbol = "r"
+#
+#[red]
+#symbol = "red"
+#
+#[ruby]
+#symbol = "rby"
+#
+#[rust]
+#symbol = "rs "
+#
+#[scala]
+#symbol = "scala "
+#
+#[spack]
+#symbol = "spack "
+#
+#[swift]
+#symbol = "swift "
+#
+#[vagrant]
+#symbol = "vrt"
+#
+#[vlang]
+#symbol = "v"
+#
+#[zig]
+#symbol = "zig"
