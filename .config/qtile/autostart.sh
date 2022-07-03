@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Xrandr script
-~/.screenlayout/screen_layout1.sh &
+~/.screenlayout/screen_layout_def.sh &
 
 # Compositor
 picom & # --experimental-backends --vsync should prevent screen tearing on most setups if needed

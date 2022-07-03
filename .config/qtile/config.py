@@ -116,6 +116,23 @@ keys = [
             )
         ]
         ),
+    # Screen Layouts
+    KeyChord([mod], "m", [
+        Key([], "a", lazy.spawn("/home/ptc/.screenlayout/screen_layout_def.sh"),
+            desc="base screen layout"
+            ),
+        Key([], "s", lazy.spawn("/home/ptc/.screenlayout/screen_layout_sep.sh"),
+            desc="separated screen layout"
+            ),
+        Key([], "d", lazy.spawn("/home/ptc/.screenlayout/screen_layout_r1.sh"),
+            desc="repair screen layout"
+            ),
+        Key([], "f", lazy.spawn("/home/ptc/.screenlayout/screen_layout_r2.sh"),
+            desc="repair screen layout"
+            ),
+        ],
+        mode="ScreenLayout"
+        ),
     # Flameshot
     KeyChord([mod], "c", [
         Key([], "l", lazy.spawn("flameshot launcher"),

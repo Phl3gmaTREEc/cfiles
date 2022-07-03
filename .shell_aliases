@@ -37,9 +37,10 @@ alias rsd='redshift -x'
 ## Apps
 alias v='nvim'
 alias e='cd "$(xplr --print-pwd-as-result)"'
+alias att='archlinux-tweak-tool'
 
 ## Background
-alias bgs='feh --bg-fill ~/Pictures/Wallpapers/therepoclub_dracula1_mod.png'
+alias bgs='feh --bg-fill ~/Pictures/Wallpapers/arch3.jpg'
 
 ## LS & CD
 #alias ls='exa -lhaG --icons --time-style=long-iso'
