@@ -366,6 +366,7 @@ def init_widgets_list():
                 foreground=colors[0],
                 ),
     # Inactive
+                #widget.WidgetBox(), Consider adding this as a way to hide systray, or try to figure out icon theme
                 #widget.Prompt(),
                 #widget.CapsNumLockIndicator(),
                 #widget.CheckUpdates(),
