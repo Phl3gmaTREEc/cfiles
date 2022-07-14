@@ -226,11 +226,11 @@ layouts = [
 # Widgets
 # Widgets defaults
 widget_defaults = dict(
-        font="JetBrainsMono Nerd Font Bold",
-    fontsize=14,
-    padding=3,
     background=colors[0],
+    font="JetBrainsMono Nerd Font Bold",
+    fontsize=14,
     foreground=colors[3],
+    padding=3,
 )
 extension_defaults = widget_defaults.copy()
 ## Widget list
@@ -238,47 +238,45 @@ def get_widgets(primary=False, secondary=False):
     widgets = [
 ## "start" button
         widget.TextBox(
-            text='\uE606',
-            padding=10,
+            background=colors[0],
             fontsize=20,
+            foreground=colors[9],
             mouse_callbacks= {
                 'Button1':
                 lambda: qtile.cmd_spawn("rofi -show run")
             },
-            background=colors[0],
-            foreground=colors[9],
+            padding=10,
+            text='\uE606',
             ),
 ## Sep
         widget.Sep(
-                size_percent=75,
-                linewidth=2,
-                foreground=colors[3],
+            foreground=colors[3],
+            linewidth=2,
+            size_percent=75,
             ),
 ## Group Box
         widget.GroupBox(
-            margin_x=2,
-            margin_y=4,
+            active=colors[6],
             background=colors[0],
-            highlight_method="line",
-            highlight_color=colors[0],
-            borderwidth=4,
-            block_highlight_text_color=colors[6],
-            active=colors[7],
-            inactive=colors[4],
-            other_current_screen_border=colors[11],
-            other_screen_border=colors[11],
-            this_current_screen_border=colors[6],
-            this_screen_border=colors[6],
+            borderwidth=2,
             disable_drag=True,
-            use_mouse_wheel=False,
-            urgent_alert_method='block',
+            highlight_color=colors[0],
+            highlight_method="line",
+            inactive=colors[2],
+            other_current_screen_border=colors[7],
+            other_screen_border=colors[7],
+            padding=2,
+            this_current_screen_border=colors[5],
+            this_screen_border=colors[8],
             urgent_alert_border=colors[10],
+            urgent_alert_method='border',
+            use_mouse_wheel=False,
             ),
 ## Sep
         widget.Sep(
-                size_percent=75,
-                linewidth=2,
-                foreground=colors[3],
+            foreground=colors[3],
+            size_percent=75,
+            linewidth=2,
             ),
 ## Current Layout
         widget.CurrentLayoutIcon(
@@ -287,9 +285,9 @@ def get_widgets(primary=False, secondary=False):
             ),
 ## Sep
         widget.Sep(
-                size_percent=75,
-                linewidth=2,
-                foreground=colors[3],
+            foreground=colors[3],
+            linewidth=2,
+            size_percent=75,
             ),
 ## Window Name & Chord
         widget.WindowName(
@@ -300,33 +298,33 @@ def get_widgets(primary=False, secondary=False):
             ),
 ## Sep
         widget.Sep(
-                size_percent=75,
-                linewidth=2,
-                foreground=colors[3],
+            foreground=colors[3],
+            linewidth=2,
+            size_percent=75,
             ),
 ## Keyboard Layout
         widget.KeyboardLayout(
-            configured_keyboards=['cz','us'],
-            padding=5,
             background=colors[0],
+            configured_keyboards=['cz','us'],
             foreground=colors[11],
+            padding=5,
             ),
 ## Sep
         widget.Sep(
-                size_percent=75,
-                linewidth=2,
-                foreground=colors[3],
+            foreground=colors[3],
+            linewidth=2,
+            size_percent=75,
             ),
 ## Power button
         widget.TextBox(
-            text='\uF011',
-            padding=10,
+            background=colors[0],
+            foreground=colors[10],
             mouse_callbacks= {
                 'Button1':
                 lambda: qtile.cmd_spawn(os.path.expanduser('/home/ptc/.config/rofi/powermenu.sh'))
             },
-            background=colors[0],
-            foreground=colors[10],
+            padding=10,
+            text='\uF011',
             ),
 #### Inactive
 #        widget.TextBox(
@@ -367,9 +365,9 @@ def get_widgets(primary=False, secondary=False):
 ## Sep
         widgets.insert(8,
             widget.Sep(
-                size_percent=75,
-                linewidth=2,
                 foreground=colors[3],
+                linewidth=2,
+                size_percent=75,
             ),
         )
 ## Widget box - systray
@@ -379,9 +377,9 @@ def get_widgets(primary=False, secondary=False):
                     background=colors[0],
                 ),
                 widget.Sep(
-                    size_percent=75,
-                    linewidth=2,
                     foreground=colors[3],
+                    linewidth=2,
+                    size_percent=75,
                 ),
             ],
                 close_button_location="right",
@@ -391,36 +389,34 @@ def get_widgets(primary=False, secondary=False):
 ## Sep
         widgets.insert(10,
             widget.Sep(
-                size_percent=75,
-                linewidth=2,
                 foreground=colors[3],
+                linewidth=2,
+                size_percent=75,
             ),
         )
 ## Time and date
         widgets.insert(11,
             widget.Clock(
-                format="%Y-%m-%d %a %H:%M",
-                fontsize=16,
                 background=colors[0],
                 foreground=colors[9],
+                format="%Y-%m-%d %a %H:%M",
             ),
         )
     if secondary:
 ## Sep
         widgets.insert(8,
             widget.Sep(
-                size_percent=75,
-                linewidth=2,
                 foreground=colors[3],
+                linewidth=2,
+                size_percent=75,
             ),
         )
 ## Time and date
         widgets.insert(9,
             widget.Clock(
-                format="%y-%m-%d %H:%M",
-                fontsize=16,
                 background=colors[0],
                 foreground=colors[9],
+                format="%y-%m-%d %H:%M",
             ),
         )
     return widgets
@@ -474,15 +470,15 @@ floating_layout = layout.Floating(
 
 # Additional config
 # Simple line configs
-dgroups_key_binder = None
-dgroups_app_rules = []  # type: list
-follow_mouse_focus = True
+auto_fullscreen = True
+auto_minimize = True
 bring_front_click = False
 cursor_warp = False
-auto_fullscreen = True
+dgroups_key_binder = None
+dgroups_app_rules = []  # type: list
 focus_on_window_activation = "smart"
+follow_mouse_focus = True
 reconfigure_screens = True
-auto_minimize = True
 wl_input_rules = None
 wmname = "LG3D"
 
