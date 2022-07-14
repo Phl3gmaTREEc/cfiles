@@ -92,7 +92,7 @@ keys = [
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     # Toggle WidgetBox widget
-    Key([mod], "v", lazy.widget["widgetbox"].togle(), desc="Toggle WidgetBox"),
+    Key([mod], "t", lazy.widget["widgetbox"].toggle(), desc="Toggle WidgetBox"),
     # Rofi
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="Spawn rofi"),
     Key(["mod1"], "Tab", lazy.spawn("rofi -show window"), desc="Spawn rofi window"),
