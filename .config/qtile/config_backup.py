@@ -91,12 +91,10 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    # Toggle WidgetBox widget
-    Key([mod], "v", lazy.widget["widgetbox"].togle(), desc="Toggle WidgetBox"),
     # Rofi
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="Spawn rofi"),
     Key(["mod1"], "Tab", lazy.spawn("rofi -show window"), desc="Spawn rofi window"),
-    Key([mod], "w", lazy.spawn("/home/ptc/.config/rofi/powermenu.sh"), desc="Spawn rofi shutdown script"),
+    Key(["mod1"], "F4", lazy.spawn("/home/ptc/.config/rofi/powermenu.sh"), desc="Spawn rofi shutdown script"),
     # Launch Apps
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "b", lazy.spawn(browser), desc="Launch browser"),
@@ -233,222 +231,179 @@ widget_defaults = dict(
     foreground=colors[3],
 )
 extension_defaults = widget_defaults.copy()
-## Widget list
-def get_widgets(primary=False, secondary=False):
-    widgets = [
-## "start" button
-        widget.TextBox(
-            text='\uE606',
-            padding=10,
-            fontsize=20,
-            mouse_callbacks= {
-                'Button1':
-                lambda: qtile.cmd_spawn("rofi -show run")
-            },
-            background=colors[0],
-            foreground=colors[9],
-            ),
-## Sep
-        widget.Sep(
-                size_percent=75,
-                linewidth=2,
-                foreground=colors[3],
-            ),
-## Group Box
-        widget.GroupBox(
-            margin_x=2,
-            margin_y=4,
-            background=colors[0],
-            highlight_method="line",
-            highlight_color=colors[0],
-            borderwidth=4,
-            block_highlight_text_color=colors[6],
-            active=colors[7],
-            inactive=colors[4],
-            other_current_screen_border=colors[11],
-            other_screen_border=colors[11],
-            this_current_screen_border=colors[6],
-            this_screen_border=colors[6],
-            disable_drag=True,
-            use_mouse_wheel=False,
-            urgent_alert_method='block',
-            urgent_alert_border=colors[10],
-            ),
-## Sep
-        widget.Sep(
-                size_percent=75,
-                linewidth=2,
-                foreground=colors[3],
-            ),
-## Current Layout
-        widget.CurrentLayoutIcon(
-            background=colors[0],
-            scale=0.7,
-            ),
-## Sep
-        widget.Sep(
-                size_percent=75,
-                linewidth=2,
-                foreground=colors[3],
-            ),
-## Window Name & Chord
-        widget.WindowName(
-            foreground=colors[3],
-            ),
-        widget.Chord(
-            foreground=colors[4],
-            ),
-## Sep
-        widget.Sep(
-                size_percent=75,
-                linewidth=2,
-                foreground=colors[3],
-            ),
-## Keyboard Layout
-        widget.KeyboardLayout(
-            configured_keyboards=['cz','us'],
-            padding=5,
-            background=colors[0],
-            foreground=colors[11],
-            ),
-## Sep
-        widget.Sep(
-                size_percent=75,
-                linewidth=2,
-                foreground=colors[3],
-            ),
-## Power button
-        widget.TextBox(
-            text='\uF011',
-            padding=10,
-            mouse_callbacks= {
-                'Button1':
-                lambda: qtile.cmd_spawn(os.path.expanduser('/home/ptc/.config/rofi/powermenu.sh'))
-            },
-            background=colors[0],
-            foreground=colors[10],
-            ),
-#### Inactive
-#        widget.TextBox(
-#            text='\uE0B0',
-#            padding=0,
-#            fontsize=25,
-#            foreground=colors[0],
-#            background=colors[4],
-#            ),
-#        widget.TextBox(    
-#            text='\uE0B2',
-#            padding=0,
-#            fontsize=25,
-#            foreground=colors[4],
-#            background=colors[0],
-#            ),
-#        widget.TextBox(    
-#            text='\uE0B3',
-#            padding=0,
-#            fontsize=25,
-#            foreground=colors[4],
-#            ),
-#        widget.Prompt(),
-#        widget.CapsNumLockIndicator(),
-#        widget.CheckUpdates(),
-#        widget.GenPollText(
-#           update_interval=1,
-#           func=lambda: subprocess.check_output(
-#                   "/home/ptc/.config/qtile/scripts/volume.sh").decode().strip(),
-#           mouse_callbacks = {
-#                   'Button1': lazy.spawn("pavucontrol -t 3"),
-#                   'Button3': lazy.spawn("pamixer -t")
-#                   }
-#           ),
-        ]
-## Inserting widgets per screen
-    if primary:
-## Sep
-        widgets.insert(8,
-            widget.Sep(
-                size_percent=75,
-                linewidth=2,
-                foreground=colors[3],
-            ),
-        )
-## Widget box - systray
-        widgets.insert(9,
-            widget.WidgetBox(widgets=[
-                widget.Systray(
-                    background=colors[0],
+# Widget list
+def init_widgets_list():
+    widgets_list = [
+    # "start" button
+            widget.TextBox(
+                text='\uE606',
+                padding=5,
+                fontsize=20,
+                mouse_callbacks= {
+                    'Button1':
+                    lambda: qtile.cmd_spawn("rofi -show run")
+                },
+                background=colors[4],
+                foreground=colors[0],
                 ),
-                widget.Sep(
-                    size_percent=75,
-                    linewidth=2,
-                    foreground=colors[3],
+             widget.TextBox(
+                text='\uE0B0',
+                padding=0,
+                fontsize=25,
+                foreground=colors[4],
+                background=colors[0],
                 ),
-            ],
-                close_button_location="right",
-                foreground=colors[6],
-            ),
-        )
-## Sep
-        widgets.insert(10,
-            widget.Sep(
-                size_percent=75,
-                linewidth=2,
+    # Group Box
+            widget.GroupBox(
+                margin_x=2,
+                margin_y=4,
+                background=colors[0],
+                highlight_method="line",
+                highlight_color=colors[0],
+                borderwidth=4,
+                block_highlight_text_color=colors[6],
+                active=colors[7],
+                inactive=colors[4],
+                other_current_screen_border=colors[11],
+                other_screen_border=colors[11],
+                this_current_screen_border=colors[6],
+                this_screen_border=colors[6],
+                disable_drag=True,
+                use_mouse_wheel=False,
+                urgent_alert_method='block',
+                urgent_alert_border=colors[10],
+                ),
+            widget.TextBox(
+                text='\uE0B0',
+                padding=0,
+                fontsize=25,
+                foreground=colors[0],
+                background=colors[4],
+                ),
+    # Current Layout
+            widget.CurrentLayoutIcon(
+                background=colors[4],
+                scale=0.7,
+                ),
+            widget.TextBox(
+                text='\uE0B0',
+                padding=0,
+                fontsize=25,
+                foreground=colors[4],
+                ),
+    # Window Name & Chord
+            widget.WindowName(
                 foreground=colors[3],
-            ),
-        )
-## Time and date
-        widgets.insert(11,
+                ),
+            widget.Chord(
+                foreground=colors[4],
+                ),
+    # Systray
+            widget.TextBox(    
+                text='\uE0B3',
+                padding=0,
+                fontsize=25,
+                foreground=colors[4],
+                ),
+            widget.Systray(
+                background=colors[0],
+                ),
+            widget.TextBox(    
+                text='\uE0B2',
+                padding=0,
+                fontsize=25,
+                foreground=colors[4],
+                background=colors[0],
+                ),
+            widget.TextBox(    
+                text='\uE0B2',
+                padding=0,
+                fontsize=25,
+                foreground=colors[4],
+                ),
+    # Time and date
             widget.Clock(
                 format="%Y-%m-%d %a %H:%M",
                 fontsize=16,
+                background=colors[4],
+                foreground=colors[0],
+                ),
+            widget.TextBox(    
+                text='\uE0B2',
+                padding=0,
+                fontsize=25,
+                foreground=colors[0],
+                background=colors[4],
+                ),           
+    # Keyboard Layout
+            widget.KeyboardLayout(
+                configured_keyboards=['cz','us'],
+                padding=5,
                 background=colors[0],
-                foreground=colors[9],
-            ),
-        )
-    if secondary:
-## Sep
-        widgets.insert(8,
+                foreground=colors[4],
+                ),
             widget.Sep(
-                size_percent=75,
-                linewidth=2,
-                foreground=colors[3],
-            ),
-        )
-## Time and date
-        widgets.insert(9,
-            widget.Clock(
-                format="%y-%m-%d %H:%M",
-                fontsize=16,
+                    size_percent=100,
+                    linewidth=2,
+                    foreground=colors[0],
+                ),
+    # Power button
+            widget.TextBox(    
+                text='\uE0B2',
+                padding=0,
+                fontsize=25,
+                foreground=colors[4],
                 background=colors[0],
-                foreground=colors[9],
-            ),
-        )
-    return widgets
-
-## Old way of doing widgets per screen
+                ),
+            widget.TextBox(
+                text='\uF011',
+                padding=10,
+                mouse_callbacks= {
+                    'Button1':
+                    lambda: qtile.cmd_spawn(os.path.expanduser('/home/ptc/.config/rofi/powermenu.sh'))
+                },
+                background=colors[4],
+                foreground=colors[0],
+                ),
+    # Inactive
+                #widget.WidgetBox(), Consider adding this as a way to hide systray, or try to figure out icon theme
+                #widget.Prompt(),
+                #widget.CapsNumLockIndicator(),
+                #widget.CheckUpdates(),
+                #widget.GenPollText(
+                        #   update_interval=1,
+                        #   func=lambda: subprocess.check_output(
+                            #       "/home/ptc/.config/qtile/scripts/volume.sh").decode().strip(),
+                        #   mouse_callbacks = {
+                            #       'Button1': lazy.spawn("pavucontrol -t 3"),
+                            #       'Button3': lazy.spawn("pamixer -t")
+                            #       }
+                        #   ),
+        ]
+    return widgets_list
 # Widget filtered lists
-#def init_widgets_screen1():
-#    widgets_screen1 = init_widgets_list()
-#    del widgets_screen1[11]
-#    return widgets_screen1
-#
-#def init_widgets_screen2():
-#    widgets_screen2 = init_widgets_list()
-#    del widgets_screen2[8:11]
-#    return widgets_screen2
+def init_widgets_screen1():
+    widgets_screen1 = init_widgets_list()
+    del widgets_screen1[11]
+    return widgets_screen1
+
+def init_widgets_screen2():
+    widgets_screen2 = init_widgets_list()
+    del widgets_screen2[8:11]
+    return widgets_screen2
 
 # Screens
 screens = [
-    Screen(
-        bottom=bar.Bar(
-            get_widgets(primary=True),
-            size=24),
-        ),
-    Screen(
-        bottom=bar.Bar(
-            get_widgets(secondary=True),
-            size=24),
-        )
+        Screen(
+            bottom=bar.Bar(
+                widgets=init_widgets_screen1(),
+                size=24),
+            ),
+        Screen(
+            bottom=bar.Bar(
+                widgets=init_widgets_screen2(),
+                size=24),
+            )
 ]
 
 # Floating layout

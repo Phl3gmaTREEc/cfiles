@@ -7,3 +7,8 @@ sudo sh VentoyWeb.sh
 
 # Convert and lower quality (60) of image
 magick <source> -quality 60 <target>
+
+% tools, python, qtile
+
+# Basic python test for Qtile config
+python3 -m py_compile ~/.config/qtile/config.py
