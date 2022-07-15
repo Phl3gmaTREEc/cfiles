@@ -45,19 +45,12 @@ guifile = "thunar"
 
 # Keys
 keys = [
-    # Switch focus between windows
+# Switch focus between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
+    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
-    # Switch focus between monitors                                                                                                 
-    # To specific monitor                                                                                                      
-    # Key([mod], "e",                                                                                                          
-    #    lazy.to_screen(0),                                                                                                    
-    #    desc="Keyboard focus to monitor 0"                                                                                    
-    #    ),                                                                                                                    
-    # To next/previous monitor                                                                                                 
     Key([mod, "mod1"], "l",                                                                                                     
         lazy.next_screen(),                                                                                                   
         desc='Move focus to next monitor'                                                                                     
@@ -66,31 +59,34 @@ keys = [
         lazy.prev_screen(),                                                                                                   
         desc='Move focus to prev monitor'                                                                                     
         ),
-    # Move windows between left/right columns or move up/down in current stack.
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+# Moving windows between left/right columns or move up/down in current stack.
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window left"),
+    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
-    # Grow windows. If current window is on the edge of screen and direction
-    # will be to screen edge - window would shrink.
-    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key([mod, "shift"], "i", lazy.layout.swap_column_left(), desc="Swap column left"),
+    Key([mod, "shift"], "o", lazy.layout.swap_column_right(), desc="Swap column right"),
+# Change window size
+    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window left"),
+    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window right"),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-    # Toggle between split and unsplit sides of stack.
-    # Split = all windows displayed
-    # Unsplit = 1 window displayed, like Max layout, but still with
-    # multiple stack panes
-    Key([mod, "shift"], "Return", lazy.layout.toggle_split(),
+    Key([mod, "control"], "o", lazy.layout.grow(), desc="Shrink window"),
+    Key([mod, "control"], "i", lazy.layout.shrink(), desc="Grow window"),
+# Normalize window sizes
+    Key([mod], "n", lazy.layout.normalize(), desc="Reset window sizes"),
+# Flip layout
+    Key([mod, "shift"], "space", lazy.layout.flip(), desc="Layout flip"),
+# Toggle split/unsplit of stack.
+    Key([mod, "control"], "space", lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",),
+# Toggle between different layouts
+    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     # Kill focused window
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     # Qtile
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     # Toggle WidgetBox widget
     Key([mod], "t", lazy.widget["widgetbox"].toggle(), desc="Toggle WidgetBox"),
     # Rofi
@@ -108,18 +104,14 @@ keys = [
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer -i 5")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer -d 5")),
     Key([], "XF86AudioMute", lazy.spawn("pamixer -t")),
-    # Redshift
-    KeyChord([mod], "n", [
+    # "Mode chord" - Redshift, Screen Layouts
+    KeyChord([mod], "m", [
         Key([], "n", lazy.spawn("redshift -P -O 4500 -b 0.8"),
             desc="use redshift to toggle my config on night lilght"
             ),
         Key([], "d", lazy.spawn("redshift -x"),
             desc="use redshift to goggle my config on normal light"
-            )
-        ]
-        ),
-    # Screen Layouts
-    KeyChord([mod], "m", [
+            ),
         Key([], "a", lazy.spawn("/home/ptc/.screenlayout/screen_layout_def.sh"),
             desc="base screen layout"
             ),
@@ -133,7 +125,7 @@ keys = [
             desc="repair screen layout"
             ),
         ],
-        mode="ScreenLayout"
+        mode="MultiMode"
         ),
     # Flameshot
     KeyChord([mod], "c", [
@@ -149,20 +141,19 @@ keys = [
         Key([], "s", lazy.spawn("flameshot screen --region 2560x1080+0-379"),
             desc="flameshot single screen"
             ),
-        ]
-        ),
+        ], mode="Flameshot"),
 ]
 
 # Groups
 # Groups definition
-groups = [Group(name="a", label='A', layout='monadtall'),
-          Group(name="s", label='S', layout='monadtall'),
-          Group(name="d", label='D', layout='monadtall'),
-          Group(name="f", label='F', layout='monadtall'),
-          Group(name="u", label='U', layout='monadtall'),
-          Group(name="i", label='I', layout='verticaltile'),
-          Group(name="o", label='O', layout='verticaltile'),
-          Group(name="p", label='P', layout='verticaltile')]
+groups = [Group(name="a", label='A', layout='C2'),
+          Group(name="s", label='S', layout='C2'),
+          Group(name="d", label='D', layout='C2'),
+          Group(name="f", label='F', layout='C2'),
+          Group(name="u", label='U', layout='C2'),
+          Group(name="i", label='I', layout='C1'),
+          Group(name="o", label='O', layout='C1'),
+          Group(name="p", label='P', layout='C1')]
 # Groups keys
 for i in groups:
     keys.extend(
@@ -202,25 +193,32 @@ colors = [["#282a36", "#282a36"], # 0 - Background
 # Layouts
 # Layouts theme
 layout_theme = {"border_width": 2,
-                "margin": 8,
+                "margin": 4,
                 "border_focus": colors[4],
-                "border_normal": colors[1]
+                "border_focus_stack": colors[9],
+                "border_normal": colors[1],
+                "border_normal_stack": colors[1],
+                "border_on_single": True,
                 }
 # Layouts definition
 layouts = [
-    layout.MonadTall(**layout_theme),
-    layout.MonadThreeCol(**layout_theme),
-    layout.VerticalTile(**layout_theme),
-    layout.Columns(**layout_theme),
-    layout.Max(**layout_theme),
-    # layout.Stack(num_stacks=2, **layout_theme),
-    # layout.Bsp(**layout_theme),
-    # layout.Matrix(**layout_theme),
-    # layout.MonadWide(**layout_theme),
-    # layout.RatioTile(**layout_theme),
-    # layout.Tile(**layout_theme),
-    # layout.TreeTab(**layout_theme),
-    # layout.Zoomy(**layout_theme),
+#    layout.Bsp(**layout_theme),
+    layout.Columns(name="C2", num_columns=2, **layout_theme),
+    layout.Columns(name="C1", num_columns=1, **layout_theme),
+    layout.Columns(name="C3", num_columns=3, **layout_theme),
+#    layout.Matrix(**layout_theme),
+#    layout.Max(**layout_theme),
+    layout.MonadTall(name="MT", **layout_theme),
+#    layout.MonadThreeCol(name="M3", **layout_theme),
+    layout.MonadWide(name="MW", **layout_theme),
+#    layout.RatioTile(**layout_theme),
+#    layout.Slice(**layout_theme),
+#    layout.Spiral(**layout_theme),
+#    layout.Stack(num_stacks=2, **layout_theme),
+#    layout.Tile(**layout_theme),
+#    layout.TreeTab(**layout_theme),
+#    layout.VerticalTile(**layout_theme),
+    layout.Zoomy(name="ZM", **layout_theme),
 ]
 
 # Widgets
@@ -228,9 +226,9 @@ layouts = [
 widget_defaults = dict(
     background=colors[0],
     font="JetBrainsMono Nerd Font Bold",
-    fontsize=14,
+    fontsize=16,
     foreground=colors[3],
-    padding=3,
+    padding=5,
 )
 extension_defaults = widget_defaults.copy()
 ## Widget list
@@ -239,11 +237,10 @@ def get_widgets(primary=False, secondary=False):
 ## "start" button
         widget.TextBox(
             background=colors[0],
-            fontsize=20,
-            foreground=colors[9],
+            fontsize=22,
+            foreground=colors[8],
             mouse_callbacks= {
-                'Button1':
-                lambda: qtile.cmd_spawn("rofi -show run")
+                'Button1': lazy.spawn("rofi -show run"),
             },
             padding=10,
             text='\uE606',
@@ -256,7 +253,7 @@ def get_widgets(primary=False, secondary=False):
             ),
 ## Group Box
         widget.GroupBox(
-            active=colors[6],
+            active=colors[9],
             background=colors[0],
             borderwidth=2,
             disable_drag=True,
@@ -266,8 +263,8 @@ def get_widgets(primary=False, secondary=False):
             other_current_screen_border=colors[7],
             other_screen_border=colors[7],
             padding=2,
-            this_current_screen_border=colors[5],
-            this_screen_border=colors[8],
+            this_current_screen_border=colors[6],
+            this_screen_border=colors[5],
             urgent_alert_border=colors[10],
             urgent_alert_method='border',
             use_mouse_wheel=False,
@@ -279,9 +276,10 @@ def get_widgets(primary=False, secondary=False):
             linewidth=2,
             ),
 ## Current Layout
-        widget.CurrentLayoutIcon(
+        widget.CurrentLayout(
             background=colors[0],
-            scale=0.7,
+            foreground=colors[11],
+# From LayoutIcon           scale=0.7,
             ),
 ## Sep
         widget.Sep(
@@ -291,7 +289,8 @@ def get_widgets(primary=False, secondary=False):
             ),
 ## Window Name & Chord
         widget.WindowName(
-            foreground=colors[3],
+            foreground=colors[4],
+            format="{name}{state}",
             ),
         widget.Chord(
             foreground=colors[4],
@@ -320,8 +319,7 @@ def get_widgets(primary=False, secondary=False):
             background=colors[0],
             foreground=colors[10],
             mouse_callbacks= {
-                'Button1':
-                lambda: qtile.cmd_spawn(os.path.expanduser('/home/ptc/.config/rofi/powermenu.sh'))
+                "Button1": lazy.spawn('/home/ptc/.config/rofi/powermenu.sh'),
             },
             padding=10,
             text='\uF011',
@@ -416,7 +414,7 @@ def get_widgets(primary=False, secondary=False):
             widget.Clock(
                 background=colors[0],
                 foreground=colors[9],
-                format="%y-%m-%d %H:%M",
+                format="%H:%M",
             ),
         )
     return widgets
@@ -438,12 +436,12 @@ screens = [
     Screen(
         bottom=bar.Bar(
             get_widgets(primary=True),
-            size=24),
+            size=30),
         ),
     Screen(
         bottom=bar.Bar(
             get_widgets(secondary=True),
-            size=24),
+            size=30),
         )
 ]
 
